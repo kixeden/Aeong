@@ -1,0 +1,207 @@
+ 
+using System;
+using System.Windows.Forms;
+using System.Linq;
+
+
+namespace _20200224
+{
+    public partial class Form1 : Form
+    {
+        string Bind = "";
+        bool EBind = false;
+        //이걸로 묶어서 숫자 키패드 완성할 것 
+        enum eOperator   { Plus = 1, Minus = 2 };
+        // swithc 문 사용
+        // 
+    public Form1()
+        {
+            InitializeComponent();
+            this.Load += Form1_Load;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            btn1.Click += btn_Click;
+            btn2.Click += btn_Click;
+            btn3.Click += btn_Click;
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+           
+            
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "7";
+        }
+
+        private void btn0_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "0";
+        }
+
+        private void btn1_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "1";
+        }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "2";
+        }
+
+        private void btn3_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "3";
+        }
+
+        private void btn4_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "4";
+        }
+
+        private void btn5_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "5";
+        }
+       
+
+        private void btn8_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "8";
+        }
+
+        private void btn9_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "9";
+        }
+
+        private void btn_pluse_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "+";
+        }
+
+        private void btn_minus_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "-";
+        }
+
+        private void btn_multiply_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "*";
+        }
+
+        private void btn_division_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "/";
+        }
+
+
+        // 앞에서 숫자 자리수 만큼 잘르고,
+        // 다음은 연산자
+        // 연산자 우선순위를 정해서 계산
+        
+            /*
+             *  123+456*12/23-4 =
+             *  *,/,+,- 
+             */
+        // 컨트롤명칭
+        // bun, lst, txt, ->형식을 3자로 압축
+        // button_equal -> btnEqual 
+        // txtAnswer 
+        // split({'+','-',....}
+        // if -> select
+        // array -> list, sortedlist
+        // 형식 -> enum 
+
+
+
+        private void btn_equal_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            if (Textbox_answer.Text.Contains("+")) 
+            {
+                i = Textbox_answer.Text.IndexOf("+");
+            }
+            else if (Textbox_answer.Text.Contains("-"))
+            {
+                i = Textbox_answer.Text.IndexOf("-");
+            }
+            else if (Textbox_answer.Text.Contains("*"))
+            {
+                i = Textbox_answer.Text.IndexOf("*");
+            }
+            else if (Textbox_answer.Text.Contains("/"))
+            {
+                i = Textbox_answer.Text.IndexOf("/");
+            }
+            
+            string a = Textbox_answer.Text.Substring(i, 1);
+            double a1 = Convert.ToDouble(Textbox_answer.Text.Substring(0, i));
+             double a2 = Convert.ToDouble(Textbox_answer.Text.Substring(i + 1, Textbox_answer.Text.Length - i - 1));
+            
+            if (a == "+")
+            {
+                listBox1.Items.Add(Textbox_answer.Text + "=" + (a1 + a2));
+                Textbox_answer.Text = (a1 + a2).ToString();
+            }
+            else if (a == "-")
+            {
+                listBox1.Items.Add(Textbox_answer.Text + "=" + (a1 - a2));
+                Textbox_answer.Text = (a1 - a2).ToString();
+            }
+            else if (a == "*")
+            {
+                listBox1.Items.Add(Textbox_answer.Text + "=" + (a1 * a2));
+                Textbox_answer.Text = (a1 * a2).ToString();
+            }
+            else if (a == "/")
+            {
+                listBox1.Items.Add(Textbox_answer.Text + "=" + (a1 / a2));
+                Textbox_answer.Text = (a1 / a2).ToString();
+            }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Clear();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Clear();
+        }
+
+        private void btn_log_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+        }
+
+        private void btn6_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += "6";
+        }
+
+        private void btn_dot_Click(object sender, EventArgs e)
+        {
+            Textbox_answer.Text += ".";
+        }
+
+        void test()
+        {
+            eOperator op;
+            
+          
+
+
+
+
+
+
+        }
+    }
+}
