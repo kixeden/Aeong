@@ -1,0 +1,223 @@
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _20200224
+{
+    public partial class Form1 : Form
+    {
+        string Symbol = "";
+
+
+        public Form1()
+        {
+            InitializeComponent();
+            this.Load += Form1_Load;
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            btn0.Click += btn_num_Click;
+            btn1.Click += btn_num_Click;
+            btn2.Click += btn_num_Click;
+            btn3.Click += btn_num_Click;
+            btn4.Click += btn_num_Click;
+            btn5.Click += btn_num_Click;
+            btn6.Click += btn_num_Click;
+            btn7.Click += btn_num_Click;
+            btn8.Click += btn_num_Click;
+            btn9.Click += btn_num_Click;
+            btn_dot.Click += btn_num_Click;
+            btn_equal.Click += btn_equal_Click;
+
+
+        }
+        //계산할 때 공백 +
+        /*
+        String addBlank(String strText)
+        {
+            String rtrnStr = "";
+            for (int i = 0; i < strText.Length; i++)
+            {
+                switch (strText[i])
+                {
+
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        rtrnStr += strText[i];
+                        break;
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                        rtrnStr += " " + strText[i] + " ";
+                        break;
+
+                }
+                if (strText[i] == ' ')
+                {
+
+                }
+            }
+            return rtrnStr;
+        }
+        */
+        //이런식 말고
+
+        //계산할때 쓸거
+
+
+
+
+        private void btn_num_Click(object sender, EventArgs e)
+        {
+            if (txt_Answer.Text == "0")
+                txt_Answer.Clear();                             //0이면 clear 한번 땡기고 출력한다.
+            Button button = (Button)sender;
+
+            txt_Answer.Text = txt_Answer.Text + button.Text;        //버튼 눌렸을 때 눌린 버튼의 txt값을 읽어와서 출력
+        }
+
+        //밑에는 지우기 버튼 구문 건들 ㄴㄴ
+        private void button21_Click(object sender, EventArgs e)
+        {
+            txt_Answer.Clear();
+            txt_Answer.Text += "0";
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            txt_Answer.Clear();
+            txt_Answer.Text += "0";
+        }
+
+        private void btn_log_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+        }
+        private void btn_symbol_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            Symbol = button.Text;
+            txt_Answer.Text = txt_Answer.Text + button.Text;
+        }
+
+        private void btn_equal_Click(object sender, EventArgs e)
+        {
+            string str = txt_Answer.Text;
+            str = str.Replace("+", ";+;");
+            str = str.Replace("-", ";-;");
+            str = str.Replace("*", ";*;");
+            str = str.Replace("/", ";/;");
+
+            string[] tokens = str.Split(new char[] { ';' });
+            clsStack stack = new clsStack();
+
+            foreach (string item in tokens)
+            {
+                stack.push(item);
+
+
+
+            }
+
+        }
+
+
+        //이거 연산하는거만 하자 ㅇㅇ 
+        //object 쓰지말고 
+    }
+}
+
+
+//이 밑에가 class 
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _20200224
+{
+
+
+    //스택 처음부터 한개한개씩 알아보자 잘 모름
+    public interface IStack
+    {
+        bool Empty();                //Istack 비면
+
+        string peek();               // 젤 위에 탑값 리턴할때
+
+        void push(string inObject);  //값 입력할때
+
+        string pop();
+
+
+    }
+    
+    public class clsStack : IStack
+    {
+        List<string> stack;
+
+        public clsStack()
+        {
+            stack = new List<string>();
+        }
+
+        public string peek()
+        {
+            return stack[stack.Count - 1];
+        }
+
+        public string pop()
+        {
+            string o = peek();
+            stack.RemoveAt(stack.Count - 1);
+            return o;
+        }
+        public bool Empty()
+        {
+            return stack.Count == 0;
+        }
+
+        public void push(string str)
+        {
+            stack.Add(str);
+        }
+
+        public string toString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (string s in stack)
+            {
+                sb.Append(s);
+            }
+            return sb.ToString();
+        }
+    }
+}
+//파일로 올리는법을 모르겠다
+
+
